@@ -7,4 +7,4 @@ source = requests.get('https://www.coursera.org/learn/python-data').text
 
 soup = BeautifulSoup(source, 'lxml')
 
-print(soup.prettify())
+print(soup.prettify().encode('utf-8'))
