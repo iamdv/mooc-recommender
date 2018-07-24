@@ -11,9 +11,13 @@ def get_course_listing(input_uri):
   for alink in soup.find_all('a'):
     # uri_listing.append(alink.encode('utf-8').strip())
     print(alink.find('div', class_ = 'card-info').encode('utf-8').strip())
+    print('----------------------')
     print (alink['href'])
+    print('----------------------')    
     print(alink.find('span', class_ = 'product-badge'))
+    print('----------------------')    
     print(alink.find('span', class_ = 'card-description').encode('utf-8'))
+    print('----------------------')    
   # with open('../Data/course_listing.json', 'w') as outputfile:
   #   json.dump(uri_listing, outputfile)
 
@@ -36,4 +40,5 @@ get_course_listing('https://www.coursera.org/courses')
 # #266
 
 
-# https://www.coursera.org/courses?refinementList%5Blanguage%5D=&page=1&indices%5Btest_suggestions%5D%5Bconfigure%5D%5BhitsPerPage%5D=5&indices%5Btest_suggestions%5D%5BrefinementList%5D%5Bpage%5D=1&indices%5Btest_suggestions%5D%5Bpage%5D=1&indices%5Btest_careers%5D%5Bconfigure%5D%5BhitsPerPage%5D=1&indices%5Btest_careers%5D%5BrefinementList%5D%5Bpage%5D=1&indices%5Btest_careers%5D%5Bpage%5D=1&indices%5Btest_degrees_keyword_only%5D%5Bconfigure%5D%5BhitsPerPage%5D=3&indices%5Btest_degrees_keyword_only%5D%5BrefinementList%5D%5Bpage%5D=1&indices%5Btest_degrees_keyword_only%5D%5Bpage%5D=1&indices%5Btest_products%5D%5Bconfigure%5D%5BhitsPerPage%5D=20&indices%5Btest_products%5D%5BrefinementList%5D%5Bpage%5D=1&indices%5Btest_products%5D%5Bpage%5D=4
+
+# https://www.coursera.org/courses?indices%5Btest_products%5D%5Bpage%5D=2&indices%5Btest_products%5D%5Bconfigure%5D%5BhitsPerPage%5D=20&indices%5Btest_suggestions%5D%5Bconfigure%5D%5BhitsPerPage%5D=5&indices%5Btest_careers%5D%5Bconfigure%5D%5BhitsPerPage%5D=1&indices%5Btest_degrees_keyword_only%5D%5Bconfigure%5D%5BhitsPerPage%5D=3
