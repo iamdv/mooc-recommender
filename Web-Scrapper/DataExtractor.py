@@ -4,24 +4,24 @@ import lxml
 import html5lib
 import json
 
-def get_course_listing(input_uri):
-  uri_listing = []
-  source = requests.get(input_uri).text
-  soup = BeautifulSoup(source, 'lxml') 
-  for alink in soup.find_all('a'):
-    # uri_listing.append(alink.encode('utf-8').strip())
-    print(alink.find('div', class_ = 'card-info').encode('utf-8').strip())
-    print('----------------------')
-    print (alink['href'])
-    print('----------------------')    
-    print(alink.find('span', class_ = 'product-badge'))
-    print('----------------------')    
-    print(alink.find('span', class_ = 'card-description').encode('utf-8'))
-    print('----------------------')    
-  # with open('../Data/course_listing.json', 'w') as outputfile:
-  #   json.dump(uri_listing, outputfile)
+# def get_course_listing(input_uri):
+#   uri_listing = []
+#   source = requests.get(input_uri).text
+#   soup = BeautifulSoup(source, 'lxml') 
+#   for alink in soup.find_all('a'):
+#     # uri_listing.append(alink.encode('utf-8').strip())
+#     print(alink.find('div', class_ = 'card-info').encode('utf-8').strip())
+#     print('----------------------')
+#     print (alink['href'])
+#     print('----------------------')    
+#     print(alink.find('span', class_ = 'product-badge'))
+#     print('----------------------')    
+#     print(alink.find('span', class_ = 'card-description').encode('utf-8'))
+#     print('----------------------')    
+#   # with open('../Data/course_listing.json', 'w') as outputfile:
+#   #   json.dump(uri_listing, outputfile)
 
-get_course_listing('https://www.coursera.org/courses')
+# get_course_listing('https://www.coursera.org/courses')
     
 
 # # source = requests.get('https://www.coursera.org/learn/python-data').text
@@ -40,5 +40,17 @@ get_course_listing('https://www.coursera.org/courses')
 # #266
 
 
+def get_course_listing():
+  with open("../Data/course_catalog.html", encoding="utf-8") as input_file:
+    data = input_file.read()
+    soup = BeautifulSoup(data, 'html.parser')
+    for alink in soup.find_all('a'):
+      product_badge = alink.find('span', {'class' : 'product-badge'})
+      course_info =  alink.find('div', {'class' : 'card-info'})
+      if not product_badge == None:
+        course_description = alink.find('span', class_ = 'card-description').encode('utf-8').strip()
+        print (alink['href'], product_badge.text, course_description)
 
-# https://www.coursera.org/courses?indices%5Btest_products%5D%5Bpage%5D=2&indices%5Btest_products%5D%5Bconfigure%5D%5BhitsPerPage%5D=20&indices%5Btest_suggestions%5D%5Bconfigure%5D%5BhitsPerPage%5D=5&indices%5Btest_careers%5D%5Bconfigure%5D%5BhitsPerPage%5D=1&indices%5Btest_degrees_keyword_only%5D%5Bconfigure%5D%5BhitsPerPage%5D=3
+        
+
+get_course_listing()
