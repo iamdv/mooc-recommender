@@ -49,11 +49,11 @@ def get_course_listing():
         soup = BeautifulSoup(data, 'html.parser')
         for alink in soup.find_all('a'):
             product_badge = alink.find('span', {'class': 'product-badge'})
-            course_info = alink.find('div', {'class': 'card-info'})
+            # course_info = alink.find('div', {'class': 'card-info'})
             if not product_badge == None:
                 course_description = alink.find(
                     'span', class_='card-description')
-                print(alink['href'], product_badge.text, course_description.text)
+                print(alink['href'], '|' ,product_badge.text, '|' ,course_description.text, '|')
 
 
 get_course_listing()
