@@ -50,7 +50,12 @@ def getCourseListing():
 
 #############################################################################
 def getCourseContent():
-    myBreadCrumb = []
+    courseBreadCrumb = []
+    courseDescription = ''
+    courseLevel = ''
+    courseCommitment = ''
+    courseLanguage = ''
+    courseUserRating = ''
 
     with open("./Data/course_listing.csv", 'r') as myCSVFile:
         theCSVreader = csv.reader(myCSVFile)
@@ -61,8 +66,14 @@ def getCourseContent():
     soup = BeautifulSoup(source, 'lxml')
     for data in soup.find_all('div', class_='rc-BannerBreadcrumbs'):
         for a in data.find_all('a'):
-            myBreadCrumb.append(a.text)
-    print(myBreadCrumb)
+            courseBreadCrumb.append(a.text)
+    courseDescription = soup.find('p', class_="course-description")
+
+    for td in soup.find_all('td', class_="td-data"):
+        print(td)
+
+    print(courseBreadCrumb)
+    print(courseDescription)
 
 
 getCourseContent()
