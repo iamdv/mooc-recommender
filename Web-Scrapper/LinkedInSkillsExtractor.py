@@ -12,7 +12,8 @@ import csv
 def get_all_files(path):
     '''
     Extract all file paths from the respective folder
-    return: <List> full path and the file name
+    :param text1: File path
+    :return: <List> returns a list of file paths and names. 
     '''
     my_file_list = [path + '/' + f for f in listdir(path)
                     if isfile(join(path, f))]
@@ -23,7 +24,8 @@ def get_skills(uri):
     '''
     Open the html page and read the file using BS4 html.parser
     Extract all the roles, skills, endorsements, profile_name
-    return: <None> but store the data in the CSV file
+    :param: URI of the html page
+    :return: <None> but store the data in the CSV file
     '''
     my_output_list = []
     my_role = os.path.basename(uri).split('-')[0].strip()
@@ -55,5 +57,6 @@ def store_skills_csv(files):
         get_skills(each_file)
     return None
 
-my_file_path = get_all_files('/Users/DV/GitHub/mooc-recommender/Web-Scrapper/LinkedInProfiles')
+my_file_path = get_all_files(
+    '/Users/DV/GitHub/mooc-recommender/Web-Scrapper/LinkedInProfiles')
 store_skills_csv(my_file_path)
