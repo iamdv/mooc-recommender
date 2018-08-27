@@ -37,6 +37,10 @@ def get_linkedin_profiles(uri):
             my_skill = skill.text.replace('for', '|').split('|')[1].strip()
             my_output_list.append(tuple((my_role, my_skill, my_score, my_name)))
 
-    return my_output_list
+    with open('eggs.csv', 'wb') as csvfile:
+        spamwriter = csv.writer(csvfile, delimiter=' ',
+                                quotechar='|', quoting=csv.QUOTE_MINIMAL)
+        spamwriter.writerow(['Spam'] * 5 + ['Baked Beans'])
+        spamwriter.writerow(['Spam', 'Lovely Spam', 'Wonderful Spam'])
 
 print(get_linkedin_profiles("/Users/DV/GitHub/mooc-recommender/Web-Scrapper/LinkedInProfiles/Data Scientist - Aleksandra Iljina.html"))
