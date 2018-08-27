@@ -13,14 +13,13 @@ def get_all_files(path):
     '''
     Extract all file paths from the respective folder
     return: <List> full path and the file name
-    '''    
-    my_file_list = []
-    my_file_list.append([path + f for f in listdir(path)
-                        if isfile(join(path, f))])
+    '''
+    my_file_list = [path + '/' + f for f in listdir(path)
+                    if isfile(join(path, f))]
     return my_file_list
 
 
-def get_linkedin_profiles(uri):
+def get_skills(uri):
     '''
     Open the html page and read the file using BS4 html.parser
     Extract all the roles, skills, endorsements, profile_name
@@ -37,7 +36,7 @@ def get_linkedin_profiles(uri):
         soup = BeautifulSoup(data, 'html.parser')
     all_skills = soup.find_all('a')
 
-    with open('././Data/linkedin_skills.csv', 'w') as csvfile:
+    with open('././Data/linkedin_skills.csv', 'a') as csvfile:
         for each_skill in all_skills:
             skill = each_skill.find('span', {'class': 'visually-hidden'})
             if skill is not None:
@@ -51,5 +50,10 @@ def get_linkedin_profiles(uri):
     return None
 
 
-# print(get_linkedin_profiles("/Users/DV/GitHub/mooc-recommender/Web-Scrapper/LinkedInProfiles/Data Scientist - Aleksandra Iljina.html"))
-print(get_all_files('/Users/DV/GitHub/mooc-recommender/Web-Scrapper/LinkedInProfiles/'))
+def store_skills_csv(files):
+    for each_file in files:
+        get_skills(each_file)
+    return None
+
+my_file_path = get_all_files('/Users/DV/GitHub/mooc-recommender/Web-Scrapper/LinkedInProfiles')
+store_skills_csv(my_file_path)
