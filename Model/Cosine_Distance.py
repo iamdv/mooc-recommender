@@ -32,3 +32,15 @@ def cosine_sim(text1, text2):
     tfidf = vectorizer.fit_transform([text1, text2])
     return ((tfidf * tfidf.T).A)[0, 1]
 
+
+def execute_cosine(fpath_skills, fpath_courses):
+    df_skills = pd.read_csv(fpath_skills, sep=',')
+    df_courses = pd.read_csv(fpath_courses, sep=',')
+    for s_index, s_row in df_skills.iterrows():
+        if s_row['Role'] == 'Data Scientist':
+            for c_index, c_row in df_courses.iterrows():
+                
+            # print(row['Skills'], row['SkillWeight'])
+
+
+execute_cosine('././Data/linkedin_skills_weighted.csv', '././Data/main_coursera.csv')
