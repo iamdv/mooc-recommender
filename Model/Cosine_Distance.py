@@ -9,6 +9,7 @@ import csv
 pd.set_option('display.max_columns', 10)
 # nltk.download('stopwords')
 
+
 def normalize(text):
     """
     Normalizes the text to remove the capital letters and punctuations
@@ -37,47 +38,34 @@ def cosine_sim(text1, text2):
 def execute_cosine(fpath_skills, fpath_courses):
     df_skills = pd.read_csv(fpath_skills, sep=',')
     df_courses = pd.read_csv(fpath_courses, sep=',')
-    test_list = []
-    for _, c_row in df_courses.iterrows():
-        c_wgtd_skill_cname = 0
-        c_wgtd_skill_cdesc = 0
-        c_wgtd_role_cname = 0
-        c_wgtd_role_cdesc = 0
-        for _, s_row in df_skills.iterrows():
-            if s_row['Role'] == 'Data Scientist':
-                # print(c_row['Course Description'].encode('utf-8'))
-                c_wgtd_skill_cname= c_wgtd_skill_cname + (
-                    cosine_sim(
-                               str(s_row['Skills']).encode('utf-8'),
-                               str(c_row['Course Name']).encode('utf-8'))
-                               * s_row['SkillWeight'])
-                c_wgtd_skill_cdesc = c_wgtd_skill_cdesc + (
-                    cosine_sim(
-                               str(s_row['Skills']).encode('utf-8'),
-                               str(c_row['Course Description']).encode('utf-8'))
-                               * s_row['SkillWeight'])     
-                c_wgtd_role_cname = c_wgtd_role_cname + (
-                    cosine_sim(
-                               str(s_row['Role']).encode('utf-8'),
-                               str(c_row['Course Name']).encode('utf-8'))
-                               * s_row['SkillWeight'])  
-                c_wgtd_role_cdesc = c_wgtd_role_cdesc + (
-                    cosine_sim(
-                               str(s_row['Role']).encode('utf-8'),
-                               str(c_row['Course Description']).encode('utf-8'))
-                               * s_row['SkillWeight'])                                                                     
 
-        # print(c_wgtd_score)
-        test_list.append((c_row['Course Id'], c_wgtd_skill_cname, c_wgtd_skill_cdesc, c_wgtd_role_cname, c_wgtd_role_cdesc))
+    cosine_score = []
+    for _, c_row in df_courses.iterrows():
+        c_wgtd_role_score = 0
+        c_wgtd_skill_score = 0
+        course_text = (str(c_row['Category']) + ' '
+        + str(c_row['Course Name']) + ' '
+        + str(c_row['Course Description'])).encode('utf-8')
+
+        for _, s_row in df_skills.iterrows():
+            skill = str(s_row['Skills']).encode('utf-8')
+            skill_weight = s_row['SkillWeight']
+            
+            if s_row['Role'] == 'Data Scientist':
+                c_wgtd_skill_score =  c_wgtd_skill_score + (cosine_sim(skill, course_text) * skill_weight)
+                c_wgtd_role_score = cosine_sim(s_row['Role'], c_row['Category'])
+        
+        cosine_score.append((c_row['Course Id'], c_wgtd_skill_score, c_wgtd_role_score))
+    
     with open("././Data/temp_output.csv",'w') as result:
         csv_out = csv.writer(result)
-        csv_out.writerow(['Course Id','skill_cname', 'skill_cdesc' ,'role_cname', 'role_cdesc'])
-        for row in test_list:
-            csv_out.writerow(row)
+        csv_out.writerow(['Course Id', 'skill_score','role_score'])
+        for row in cosine_score:
+            csv_out.writerow(row)   
     return None
 
 
-print(execute_cosine('././Data/temp.csv', '././Data/main_coursera.csv'))
+print(execute_cosine('././Data/linkedin_skills_weighted.csv', '././Data/main_coursera.csv'))
 # print(cosine_sim('Data Science', 'Data'))
 # print(cosine_sim('hello world .', 'This sentence is similar to a foo bar sentence'))
 # linkedin_skills_weighted

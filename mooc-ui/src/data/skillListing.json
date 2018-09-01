@@ -9,7 +9,7 @@
     },
     {
       "skillID": 2,
-      "skillTheme": "Data Visualization Engineer",
+      "skillTheme": "Software Developer",
       "skillDomain": ["Data Science", "Statistics", "Business Intelligence", "Dimensional Modelling"],
       "skills": ["Visualisation", "Presentation", "Exploratory Data Analysis", "Statistics", "Algorithms", "Problem Solving"],
       "skillTags": ["Tableau", "Excel", "VBA", "SQL", "BusinessIntelligence", "QlikView", "R", "Python", "Pandas", "Numpy", "Matplotlib"],
@@ -17,7 +17,7 @@
     },    
     {
       "skillID": 3,
-      "skillTheme": "Software Developer",
+      "skillTheme": "Nutritionist/ Dietician",
       "skillDomain": ["Big Data", "Data Engineering", "Database", "NoSQL", "Graph Database"],
       "skills": ["Hadoop", "Big Data", "Programming", "Scripting", "Algorithms", "Problem Solving"],
       "skillTags": ["Python", "Scala", "SQL", "Java", "C++", "Kafka", "Spark", "Apache", "Cloudera", "Hortonwork", "NIFI", "ETL", "NoSQL"],
@@ -25,7 +25,7 @@
     },
     {
       "skillID": 4,
-      "skillTheme": "Database Developer",
+      "skillTheme": "Musician",
       "skillDomain": ["Data Science", "Statistics", "Artificial Intelligence", "Deep Learning"],
       "skills": ["Linear Algebra", "Algorithms", "Supervised Learning", "Unsupervised Learning", "Reinforcement Learning", "Statistics", "Algorithms", "Problem Solving"],
       "skillTags": ["Python", "Scala", "SQL", "Java", "C++", "R", "Julia", "Pandas", "Numpy", "Scikit Learn", "NoSQL", "NLP", "Tensor Flow"],
@@ -33,7 +33,7 @@
     },
     {
       "skillID": 5,
-      "skillTheme": "Web Developer",
+      "skillTheme": "Database Developer",
       "skillDomain": ["Data Science", "Statistics", "Business Intelligence", "Dimensional Modelling", "Data Visualization"],
       "skills": ["Data Visualization", "Presentation", "Exploratory Data Analysis", "Statistics", "Algorithms", "Problem Solving"],
       "skillTags": ["Python", "JavaScript", "SQL", "BusinessIntelligence", "Tableau", "R", "Qlik", "Pandas", "Numpy", "Matplotlib", "D3", "ReactJS", "Angular"],
@@ -41,14 +41,6 @@
     },
     {
       "skillID": 6,
-      "skillTheme": "Musician",
-      "skillDomain": ["Data Science", "Statistics", "Business Intelligence", "Dimensional Modelling"],
-      "skills": ["Visualisation", "Presentation", "Exploratory Data Analysis", "Statistics", "Algorithms", "Problem Solving"],
-      "skillTags": ["Tableau", "Excel", "VBA", "SQL", "BusinessIntelligence", "QlikView", "R", "Python", "Pandas", "Numpy", "Matplotlib"],
-      "skillTagsRecommended": ["Tableau", "Excel", "VBA", "SQL", "BusinessIntelligence", "QlikView", "R"]
-    },
-    {
-      "skillID": 7,
       "skillTheme": "Financial Accountant",
       "skillDomain": ["Data Science", "Statistics", "Business Intelligence", "Dimensional Modelling"],
       "skills": ["Visualisation", "Presentation", "Exploratory Data Analysis", "Statistics", "Algorithms", "Problem Solving"],
@@ -56,15 +48,7 @@
       "skillTagsRecommended": ["Tableau", "Excel", "VBA", "SQL", "BusinessIntelligence", "QlikView", "R"]
     },
     {
-      "skillID": 8,
-      "skillTheme": "Marketing Manager",
-      "skillDomain": ["Data Science", "Statistics", "Business Intelligence", "Dimensional Modelling"],
-      "skills": ["Visualisation", "Presentation", "Exploratory Data Analysis", "Statistics", "Algorithms", "Problem Solving"],
-      "skillTags": ["Tableau", "Excel", "VBA", "SQL", "BusinessIntelligence", "QlikView", "R", "Python", "Pandas", "Numpy", "Matplotlib"],
-      "skillTagsRecommended": ["Tableau", "Excel", "VBA", "SQL", "BusinessIntelligence", "QlikView", "R"]
-    },
-    {
-      "skillID": 9,
+      "skillID": 7,
       "skillTheme": "Psychologist",
       "skillDomain": ["Data Science", "Statistics", "Business Intelligence", "Dimensional Modelling"],
       "skills": ["Visualisation", "Presentation", "Exploratory Data Analysis", "Statistics", "Algorithms", "Problem Solving"],
