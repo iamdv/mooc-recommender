@@ -6,6 +6,7 @@ import nltk
 import string
 import csv
 
+pd.set_option('display.max_columns', 10)
 # nltk.download('stopwords')
 
 def normalize(text):
@@ -38,26 +39,39 @@ def execute_cosine(fpath_skills, fpath_courses):
     df_courses = pd.read_csv(fpath_courses, sep=',')
     test_list = []
     for _, c_row in df_courses.iterrows():
-        c_wgtd_score = 0
-        c_wgtd_score2 = 0
+        c_wgtd_skill_cname = 0
+        c_wgtd_skill_cdesc = 0
+        c_wgtd_role_cname = 0
+        c_wgtd_role_cdesc = 0
         for _, s_row in df_skills.iterrows():
             if s_row['Role'] == 'Data Scientist':
                 # print(c_row['Course Description'].encode('utf-8'))
-                c_wgtd_score = c_wgtd_score + (
+                c_wgtd_skill_cname= c_wgtd_skill_cname + (
                     cosine_sim(
                                str(s_row['Skills']).encode('utf-8'),
                                str(c_row['Course Name']).encode('utf-8'))
                                * s_row['SkillWeight'])
-                c_wgtd_score2 = c_wgtd_score2 + (
+                c_wgtd_skill_cdesc = c_wgtd_skill_cdesc + (
                     cosine_sim(
                                str(s_row['Skills']).encode('utf-8'),
                                str(c_row['Course Description']).encode('utf-8'))
-                               * s_row['SkillWeight'])                               
+                               * s_row['SkillWeight'])     
+                c_wgtd_role_cname = c_wgtd_role_cname + (
+                    cosine_sim(
+                               str(s_row['Role']).encode('utf-8'),
+                               str(c_row['Course Name']).encode('utf-8'))
+                               * s_row['SkillWeight'])  
+                c_wgtd_role_cdesc = c_wgtd_role_cdesc + (
+                    cosine_sim(
+                               str(s_row['Role']).encode('utf-8'),
+                               str(c_row['Course Description']).encode('utf-8'))
+                               * s_row['SkillWeight'])                                                                     
+
         # print(c_wgtd_score)
-        test_list.append((c_row['Course Id'], c_wgtd_score, c_wgtd_score2))
+        test_list.append((c_row['Course Id'], c_wgtd_skill_cname, c_wgtd_skill_cdesc, c_wgtd_role_cname, c_wgtd_role_cdesc))
     with open("././Data/temp_output.csv",'w') as result:
         csv_out = csv.writer(result)
-        csv_out.writerow(['Course Id','CategoryCS', 'DescriptionCS'])
+        csv_out.writerow(['Course Id','skill_cname', 'skill_cdesc' ,'role_cname', 'role_cdesc'])
         for row in test_list:
             csv_out.writerow(row)
     return None

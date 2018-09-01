@@ -6,6 +6,7 @@ import nltk
 import string
 import csv
 
+pd.set_option('display.max_columns', 10)
 
 def get_skill_listing(file_path, file_name):
     """
@@ -19,11 +20,12 @@ def get_skill_listing(file_path, file_name):
 
     df_sum_skills = df_skills.groupby(['Role', 'Skills'])['Endorsements'].sum().reset_index(name ='SkillEndorsements')
     df_sum_skills.columns = ['Role', 'Skills', 'SkillEndorsements']
+    df_sum_skills = df_sum_skills.sort_values(['Role', 'SkillEndorsements'], ascending = [True, False])
+    df_sum_skills = df_sum_skills.groupby('Role').head(20).reset_index(drop = True)
     df_sum_skills['RoleTotal'] = df_sum_skills['SkillEndorsements'].groupby(df_sum_skills['Role']).transform('sum')
     df_sum_skills['SkillWeight'] = (df_sum_skills['SkillEndorsements'] / df_sum_skills['RoleTotal'])
     df_sum_skills.to_csv(file_path + 'linkedin_skills_weighted.csv', sep=',', encoding='utf-8')
     return None
-    # print(df_sum_skills[df_sum_skills[Skills] == 'Python'])
 
 
 get_skill_listing('./Data/', 'linkedin_skills.csv')
