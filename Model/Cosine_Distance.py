@@ -51,15 +51,14 @@ def execute_cosine(fpath_skills, fpath_courses):
             skill = str(s_row['Skills']).encode('utf-8')
             skill_weight = s_row['SkillWeight']
             
-            if s_row['Role'] == 'Data Scientist':
-                c_wgtd_skill_score =  c_wgtd_skill_score + (cosine_sim(skill, course_text) * skill_weight)
-                c_wgtd_role_score = cosine_sim(s_row['Role'], c_row['Category'])
+            c_wgtd_skill_score =  c_wgtd_skill_score + (cosine_sim(skill, course_text) * skill_weight)
+            c_wgtd_role_score = cosine_sim(s_row['Role'], c_row['Category'])
         
-        cosine_score.append((c_row['Course Id'], c_wgtd_skill_score, c_wgtd_role_score))
+        cosine_score.append((c_row['Course Id'], s_row['Role'], c_wgtd_skill_score, c_wgtd_role_score))
     
     with open("././Data/temp_output.csv",'w') as result:
         csv_out = csv.writer(result)
-        csv_out.writerow(['Course Id', 'skill_score','role_score'])
+        csv_out.writerow(['Course Id', 'Role', 'Skill_Score','Role_Score'])
         for row in cosine_score:
             csv_out.writerow(row)   
     return None
