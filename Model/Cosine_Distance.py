@@ -7,7 +7,7 @@ import string
 import csv
 
 pd.set_option('display.max_columns', 10)
-# nltk.download('stopwords')
+nltk.download('stopwords')
 
 
 def normalize(text):
@@ -56,7 +56,7 @@ def execute_cosine(fpath_skills, fpath_courses):
         
         cosine_score.append((c_row['Course Id'], s_row['Role'], c_wgtd_skill_score, c_wgtd_role_score))
     
-    with open("././Data/temp_output.csv",'w') as result:
+    with open("/Users/DV/GitHub/mooc-recommender/Data/Main_Coursera.csv",'w') as result:
         csv_out = csv.writer(result)
         csv_out.writerow(['Course Id', 'Role', 'Skill_Score','Role_Score'])
         for row in cosine_score:
@@ -65,6 +65,3 @@ def execute_cosine(fpath_skills, fpath_courses):
 
 
 print(execute_cosine('././Data/linkedin_skills_weighted.csv', '././Data/main_coursera.csv'))
-# print(cosine_sim('Data Science', 'Data'))
-# print(cosine_sim('hello world .', 'This sentence is similar to a foo bar sentence'))
-# linkedin_skills_weighted
