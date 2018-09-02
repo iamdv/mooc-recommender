@@ -53,7 +53,7 @@ def execute_cosine(fpath_skills, fpath_courses, my_role, output_fname):
             skill_weight = s_row['SkillWeight']
             
             c_wgtd_skill_score =  c_wgtd_skill_score + (cosine_sim(skill, course_text) * skill_weight)
-            c_wgtd_role_score = cosine_sim(s_row['Role'], c_row['Category'])
+            c_wgtd_role_score = cosine_sim(s_row['Role'], c_row['Course Name'])
         
         cosine_score.append((c_row['Course Id'], s_row['Role'], c_wgtd_skill_score, c_wgtd_role_score))
     
@@ -66,4 +66,4 @@ def execute_cosine(fpath_skills, fpath_courses, my_role, output_fname):
 
 
 print(execute_cosine('././Data/linkedin_skills_weighted.csv',
-'././Data/main_coursera.csv', 'Software Engineer', 'CosDist_SoftwareEngineer.csv'))
+'././Data/main_coursera.csv', 'Data Scientist', 'CosDist_DataScientist.csv'))
