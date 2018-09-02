@@ -35,8 +35,9 @@ def cosine_sim(text1, text2):
     return ((tfidf * tfidf.T).A)[0, 1]
 
 
-def execute_cosine(fpath_skills, fpath_courses):
+def execute_cosine(fpath_skills, fpath_courses, my_role, output_fname):
     df_skills = pd.read_csv(fpath_skills, sep=',')
+    df_skills = df_skills[(df_skills['Role'] == my_role)]
     df_courses = pd.read_csv(fpath_courses, sep=',')
 
     cosine_score = []
@@ -56,7 +57,7 @@ def execute_cosine(fpath_skills, fpath_courses):
         
         cosine_score.append((c_row['Course Id'], s_row['Role'], c_wgtd_skill_score, c_wgtd_role_score))
     
-    with open("/Users/DV/GitHub/mooc-recommender/Data/Main_Coursera.csv",'w') as result:
+    with open("././Data/Cosine-Distance/Single-Variable/" + output_fname,'w') as result:
         csv_out = csv.writer(result)
         csv_out.writerow(['Course Id', 'Role', 'Skill_Score','Role_Score'])
         for row in cosine_score:
@@ -64,4 +65,5 @@ def execute_cosine(fpath_skills, fpath_courses):
     return None
 
 
-print(execute_cosine('././Data/linkedin_skills_weighted.csv', '././Data/main_coursera.csv'))
+print(execute_cosine('././Data/linkedin_skills_weighted.csv',
+'././Data/main_coursera.csv', 'Software Engineer', 'CosDist_SoftwareEngineer.csv'))
