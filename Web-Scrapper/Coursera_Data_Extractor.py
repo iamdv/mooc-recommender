@@ -1,4 +1,4 @@
-#!/Users/dv/anaconda/bin/python3
+# !/Users/dv/anaconda/bin/python3
 # -*- coding: utf-8 -*-
 
 from bs4 import BeautifulSoup
@@ -18,12 +18,12 @@ in the data folder.
 
 
 def getCourseListing():
-    with open("./Data/course_listing.csv", 'w', newline='') as myCSVFile:
-        fieldnames = ['ID', 'FullURI', 'ProductBadge', 'CourseDescription']
+    with open("./Data/Coursera-Listings.csv", 'w', newline='') as myCSVFile:
+        fieldnames = ['ID', 'ProductBadge', 'CourseDescription', 'FullURI']
         thewriter = csv.DictWriter(myCSVFile, fieldnames=fieldnames)
         thewriter.writeheader()
 
-        with open("./Data/course_catalog.html", encoding="utf-8") as input_file:
+        with open("./Data/Archive/course_catalog.html", encoding="utf-8") as input_file:
             data = input_file.read()
             soup = BeautifulSoup(data, 'html.parser')
             id = 1
@@ -37,9 +37,9 @@ def getCourseListing():
                         'span', class_='card-description')
                     thewriter.writerow({
                         'ID': id,
-                        'FullURI': 'https://coursera.org' + alink['href'],
                         'ProductBadge': product_badge.text,
-                        'CourseDescription': course_description.text
+                        'CourseDescription': course_description.text,
+                        'FullURI': 'https://coursera.org' + alink['href']
                     })
                     id += 1
 
@@ -50,32 +50,82 @@ def getCourseListing():
 
 #############################################################################
 def getCourseContent():
-    courseBreadCrumb = []
+    courseID = 5000
+    courseName = ''
     courseDescription = ''
+    courseSlug = ''
+    courseProvider = 'Coursera'
+    courseUniversity = ''
+    courseParentSubject = ''
+    courseChildSubject = ''
+    courseCategory = ''
+    courseURI = 'https://coursera.org/learn/machine-learning'
+    courseLanguage = ''
     courseLevel = ''
     courseCommitment = ''
-    courseLanguage = ''
-    courseUserRating = ''
+    courseRating = 0
+    courseNumberOfRatings = 0
 
-    with open("./Data/course_listing.csv", 'r') as myCSVFile:
+    courseBreadCrumb = []
+    courseRatingTemp = ''
+    courseRatingList = []
+
+    with open("./Data/Coursera-Listings.csv", 'r') as myCSVFile:
         theCSVreader = csv.reader(myCSVFile)
         next(theCSVreader)
 
-    source = requests.get(
-        'https://www.coursera.org/learn/pathophysiology').text
+    source = requests.get(courseURI).text
     soup = BeautifulSoup(source, 'lxml')
     for data in soup.find_all('div', class_='rc-BannerBreadcrumbs'):
         for a in data.find_all('a'):
             courseBreadCrumb.append(a.text)
-    courseDescription = soup.find('p', class_="course-description")
+    courseDescription = soup.find('p', class_="course-description").getText()
+    courseName = soup.find('h1', class_="display-3-text").text
+    courseSlug = 'coursera-' + courseName.strip().lower().replace(' ', '-')
+    courseUniversity = soup.find('div', class_="headline-1-text creator-names").text
+    courseUniversity = courseUniversity.split(':')[1].replace('Â', '').strip()
+    courseLanguage = soup.find('div', class_="rc-Language").text
+    courseRatingTemp = soup.find('div', class_="ratings-text headline-2-text").text
+    courseRatingList = courseRatingTemp.split()
+    courseRating = courseRatingList[1]
+    courseNumberOfRatings = courseRatingList[6]
 
-    for td in soup.find_all('td', class_="td-data"):
-        print(td)
+    # for td in soup.find_all('td', class_="td-data"):
+    #     print(td)
 
-    print(courseBreadCrumb)
-    print(courseDescription)
+    print('Course Name : ', courseName)
+    print('Course Description : ', "\n", courseDescription)
+    print('Slug : ', courseSlug)
+    print('Provider : ', courseProvider)
+    print('Universities/Institutions : ', courseUniversity)
+    print('Parent Subject : ', courseBreadCrumb[1])
+    print('Child Subject : ', courseBreadCrumb[1])
+    print('Category : ', courseBreadCrumb[2])
+    print('URL : ', courseURI)
+    print('Language : ', courseLanguage)
+    print('Rating Senctence : ', courseRatingTemp)
+    print('Rating : ', courseRating)
+    print('Number of Reviews : ', courseNumberOfRatings)
+
 
 
 getCourseContent()
 
-# <a data-click-key = "discovery.phoenix_cdp.click.breadcrumb_browse_subdomain" data-click-value = "{&quot;namespace&quot;:{&quot;app&quot;:&quot;discovery&quot;,&quot;page&quot;:&quot;phoenix_cdp&quot;,&quot;component&quot;:&quot;breadcrumb_browse_subdomain&quot;,&quot;action&quot;:&quot;click&quot;},&quot;schema_type&quot;:&quot;FRONTEND&quot;,&quot;href&quot;:&quot;/browse/life-sciences/clinical-science&quot;}" data-track = "true" data-track-app = "discovery" data-track-page = "phoenix_cdp" data-track-action = "click" data-track-component = "breadcrumb_browse_subdomain" data-track-href = "/browse/life-sciences/clinical-science" href = "/browse/life-sciences/clinical-science" to = "/browse/life-sciences/clinical-science" class = "link nostyle" target = "_blank" data-reactid = "245" > Clinical Science < /a >
+
+# YES     Course Id,
+# YES     Course Name,                <h1 class="title display-3-text" data-reactid="227">General Pathophysiology</h1>
+# YES     Course Description,
+# YES     Slug,
+# YES     Provider,
+# YES     Universities/Institutions            div class="headline-1-text creator-names"
+# YES     Parent Subject,
+# YES     Child Subject,
+# YES     Category,
+# YES     Url,
+# Length,
+# YES     Language,                 <div class="rc-Language"><!-- react-text: 1464 -->English<!-- /react-text --></div>
+# Credential Name,
+# YES     Rating,
+# NO      Number of Ratings,        class="ratings-text headline-2-text"
+# YES     Certificate,
+# YES     Workload
