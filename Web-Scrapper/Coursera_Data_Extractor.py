@@ -26,7 +26,7 @@ def getCourseListing():
         with open("./Data/Archive/course_catalog.html", encoding="utf-8") as input_file:
             data = input_file.read()
             soup = BeautifulSoup(data, 'html.parser')
-            id = 1
+            id = 5000
 
             for alink in soup.find_all('a'):
                 product_badge = alink.find('span', {'class': 'product-badge'})
@@ -79,7 +79,8 @@ def getCourseContent():
     for data in soup.find_all('div', class_='rc-BannerBreadcrumbs'):
         for a in data.find_all('a'):
             courseBreadCrumb.append(a.text)
-    courseDescription = soup.find('p', class_="course-description").getText()
+    courseDescription = soup.find('p', class_="course-description")
+    courseDescription = courseDescription.getText()
     courseName = soup.find('h1', class_="display-3-text").text
     courseSlug = 'coursera-' + courseName.strip().lower().replace(' ', '-')
     courseUniversity = soup.find('div', class_="headline-1-text creator-names").text
