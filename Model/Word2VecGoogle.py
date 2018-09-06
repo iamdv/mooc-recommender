@@ -5,13 +5,16 @@ import gensim
 import os
 
 
-base_path = os.getcwd()
+base_path = './Data/'
 
-# import the pre-trained model to remove the words not in the vocabulary. We're using the open source google model trained on millions of news articles.
-model = gensim.models.KeyedVectors.load_word2vec_format(base_path+"/GoogleNews-vectors-negative300.bin", binary=True)
+'''
+Import the pre-trained model to remove the words not in the vocabulary.
+We will use the open source google model trained on millions of news articles.
+'''
 
-# load the course data
+model = gensim.models.KeyedVectors.load_word2vec_format(
+    base_path + "GoogleNews-vectors-negative300.bin", binary = True)
 
-sim = model.n_similarity(['data','science'],['data','scientist'])
+sim = model.n_similarity(['data', 'science'],['data', 'scientist'])
 
-print(sim)
+print(base_path)
