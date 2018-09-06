@@ -13,9 +13,10 @@ def convert_to_json(fpath):
     'universitiesInstitutions', 'parentSubject', 'childSubject', 
     'category', 'url', 'length', 'language', 'credentialName', 'rating', 
     'numberOfRatings', 'certificate', 'workload']
+
+    model_dict = model_data.to_dict('records')
     with open('./Data/Courses.json', 'w') as outfile:
-        json.dump(model_data, outfile, ensure_ascii=False)
-    # print(model_data)
+        json.dump(model_dict, outfile, ensure_ascii=False)
     return None
 
 
