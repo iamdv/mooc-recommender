@@ -12,11 +12,9 @@ from gensim.models import word2vec
 # Read data from course file through pandas
 
 
-def clean(course_desc, remove_stopwords=True):
-    # 1. Remove HTML
-    course_desc = BeautifulSoup(course_desc).get_text()
-    #  
-    # 2. Remove non-letters
+def clean_description(course_desc, remove_stopwords = True):
+    
+    
     course_desc = re.sub("[^a-zA-Z]"," ", course_desc)
     #
     # 3. Convert words to lower case and split them
@@ -31,7 +29,7 @@ def clean(course_desc, remove_stopwords=True):
     return(words)
 
   
-
+'''
 # Load the punkt tokenizer
 tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
 
@@ -48,8 +46,8 @@ def course_desc_to_sentences( course_desc, tokenizer, remove_stopwords=True ):
     for raw_sentence in raw_sentences:
         # If a sentence is empty, skip it
         if len(raw_sentence) > 0:
-            # Otherwise, call clean to get a list of words
-            sentences.append( clean( raw_sentence,remove_stopwords ))
+            # Otherwise, call clean_description to get a list of words
+            sentences.append( clean_description( raw_sentence,remove_stopwords ))
     #
     # Return the list of sentences (each sentence is a list of words,
     # so this returns a list of lists
@@ -84,3 +82,5 @@ model.save(model_name)
 
 
 # Now the saved model can be used just like the pre-trained google model. 
+
+'''
