@@ -58,7 +58,6 @@ def execute_word2vecGoogle(fpath_skills, fpath_courses, my_role, output_fname):
 
             try:
                 c_wgtd_skill_score = c_wgtd_skill_score + (word2vec_similarity(skill, course_text) * skill_weight)
-                print('Skill is ', skill, ' and score :', c_wgtd_skill_score)
                 c_wgtd_role_score = word2vec_similarity(role_list, course_name_list)
             except ZeroDivisionError:
                 pass
@@ -73,5 +72,5 @@ def execute_word2vecGoogle(fpath_skills, fpath_courses, my_role, output_fname):
     return None
 
 
-print(execute_word2vecGoogle('././Data/Temp_linkedin_skills_weighted.csv',
-'././Data/Temp_Courses.csv', 'Data Scientist', 'Word2VecGoogle_DataScientist.csv'))
+print(execute_word2vecGoogle('././Data/linkedin_skills_weighted.csv',
+'././Data/Main_Coursera.csv', 'Software Engineer', 'Word2VecGoogle_SoftwareEngineer.csv'))
