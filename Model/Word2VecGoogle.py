@@ -42,7 +42,7 @@ def execute_word2vecGoogle(fpath_skills, fpath_courses, my_role, output_fname):
         + str(c_row['Course Description']))
 
         course_text = [i for i in word_tokenize(course_text.lower()) if i not in stop]
-        course_text = [word for word in course_text if word in model.vocab]
+        course_text = [word for word in course_text if word in model.vocab ]
 
         for _, s_row in df_skills.iterrows():
             skill = str(s_row['Skills']).strip()
@@ -54,13 +54,17 @@ def execute_word2vecGoogle(fpath_skills, fpath_courses, my_role, output_fname):
             course_name_list = [word for word in course_name_list if word in model.vocab]
                       
             skill = [i for i in word_tokenize(skill.lower()) if i not in stop]
-            skill = [word for word in skill if word in model.vocab]
+            # skill = [word for word in skill if word in model.vocab]
 
-            try:
-                c_wgtd_skill_score = c_wgtd_skill_score + (word2vec_similarity(skill, course_text) * skill_weight)
-                c_wgtd_role_score = word2vec_similarity(role_list, course_name_list)
-            except ZeroDivisionError:
-                pass
+            if skill[0] in model.vocab:
+                print('Valid Skill: ', skill[0])
+                try:
+                    c_wgtd_skill_score = c_wgtd_skill_score + (word2vec_similarity(skill + role_list, course_text) * skill_weight)
+                    c_wgtd_role_score = word2vec_similarity(skill + role_list, course_name_list)
+                except ZeroDivisionError:
+                    pass
+            else:
+                print('Not a valid skill: ', skill[0])
             
         word2vec_score.append((c_row['Course Id'], my_role, c_wgtd_skill_score, c_wgtd_role_score))
 
@@ -73,4 +77,4 @@ def execute_word2vecGoogle(fpath_skills, fpath_courses, my_role, output_fname):
 
 
 print(execute_word2vecGoogle('././Data/linkedin_skills_weighted.csv',
-'././Data/Main_Coursera.csv', 'Software Engineer', 'Word2VecGoogle_SoftwareEngineer.csv'))
+'././Data/Main_Coursera.csv', 'Software Development', 'Word2VecGoogle_SoftwareDevelopment.csv'))
