@@ -57,7 +57,7 @@ def execute_word2vecGoogle(fpath_skills, fpath_courses, my_role, output_fname):
             # skill = [word for word in skill if word in model.vocab]
 
             if skill[0] in model.vocab:
-                print('Valid Skill: ', skill[0])
+                # print('Valid Skill: ', skill[0])
                 try:
                     c_wgtd_skill_score = c_wgtd_skill_score + (word2vec_similarity(skill + role_list, course_text) * skill_weight)
                     c_wgtd_role_score = word2vec_similarity(skill + role_list, course_name_list)
@@ -77,4 +77,4 @@ def execute_word2vecGoogle(fpath_skills, fpath_courses, my_role, output_fname):
 
 
 print(execute_word2vecGoogle('././Data/linkedin_skills_weighted.csv',
-'././Data/Main_Coursera.csv', 'Software Development', 'Word2VecGoogle_SoftwareDevelopment.csv'))
+'././Data/Main_Coursera.csv', 'Data Scientist', 'Word2VecGoogle_DataScientist.csv'))
