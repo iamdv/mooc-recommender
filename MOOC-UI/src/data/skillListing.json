@@ -14,7 +14,7 @@
       "skills": ["Visualisation", "Presentation", "Exploratory Data Analysis", "Statistics", "Algorithms", "Problem Solving"],
       "skillTags": ["Tableau", "Excel", "VBA", "SQL", "BusinessIntelligence", "QlikView", "R", "Python", "Pandas", "Numpy", "Matplotlib"],
       "skillTagsRecommended": ["Tableau", "Excel", "VBA", "SQL", "BusinessIntelligence", "QlikView", "R"]
-    },    
+    },
     {
       "skillID": 3,
       "skillTheme": "Nutritionist/ Dietician",
@@ -33,7 +33,7 @@
     },
     {
       "skillID": 5,
-      "skillTheme": "Database Developer",
+      "skillTheme": "Database Administrator",
       "skillDomain": ["Data Science", "Statistics", "Business Intelligence", "Dimensional Modelling", "Data Visualization"],
       "skills": ["Data Visualization", "Presentation", "Exploratory Data Analysis", "Statistics", "Algorithms", "Problem Solving"],
       "skillTags": ["Python", "JavaScript", "SQL", "BusinessIntelligence", "Tableau", "R", "Qlik", "Pandas", "Numpy", "Matplotlib", "D3", "ReactJS", "Angular"],
