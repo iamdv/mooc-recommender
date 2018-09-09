@@ -37,6 +37,7 @@ def execute_word2vecGoogle(fpath_skills, fpath_courses, my_role, output_fname):
     for _, c_row in df_courses.iterrows():
         c_wgtd_role_score = 0
         c_wgtd_skill_score = 0
+        c_wgtd_keyword_score = 0
         course_text = (str(c_row['Category']) + ' '
         + str(c_row['Course Name']) + ' '
         + str(c_row['Course Description']))
@@ -47,6 +48,7 @@ def execute_word2vecGoogle(fpath_skills, fpath_courses, my_role, output_fname):
         for _, s_row in df_skills.iterrows():
             skill = str(s_row['Skills']).strip()
             skill_weight = s_row['SkillWeight']
+            skill_group = []
             role_list = str(s_row['Role']).split()
             course_name_list = str(c_row['Course Name'])
 
@@ -57,24 +59,26 @@ def execute_word2vecGoogle(fpath_skills, fpath_courses, my_role, output_fname):
             # skill = [word for word in skill if word in model.vocab]
 
             if skill[0] in model.vocab:
+                skill_group.append(skill[0])
                 # print('Valid Skill: ', skill[0])
                 try:
                     c_wgtd_skill_score = c_wgtd_skill_score + (word2vec_similarity(skill + role_list, course_text) * skill_weight)
                     c_wgtd_role_score = word2vec_similarity(skill + role_list, course_name_list)
+                    c_wgtd_keyword_score = word2vec_similarity(skill_group, course_name_list)
                 except ZeroDivisionError:
                     pass
             else:
                 print('Not a valid skill: ', skill[0])
             
-        word2vec_score.append((c_row['Course Id'], my_role, c_wgtd_skill_score, c_wgtd_role_score))
+        word2vec_score.append((c_row['Course Id'], my_role, c_wgtd_skill_score, c_wgtd_role_score, c_wgtd_keyword_score))
 
     with open("././Data/Word2Vec-Google/" + output_fname,'w') as result:
         csv_out = csv.writer(result)
-        csv_out.writerow(['Course Id', 'Role', 'Skill_Score','Role_Score'])
+        csv_out.writerow(['Course Id', 'Role', 'Skill_Score','Role_Score', 'Keyword_Score'])
         for row in word2vec_score:
             csv_out.writerow(row) 
     return None
 
 
 print(execute_word2vecGoogle('././Data/linkedin_skills_weighted.csv',
-'././Data/Main_Coursera.csv', 'Data Scientist', 'Word2VecGoogle_DataScientist.csv'))
+'././Data/Main_Coursera.csv', 'musician', 'Word2VecGoogle_Musician.csv'))

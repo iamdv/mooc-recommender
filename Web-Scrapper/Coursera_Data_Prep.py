@@ -15,10 +15,10 @@ def extract_keywords(fpath_courses, fpath_skills):
     # df_courses = df_courses[(df_courses['Category'] == 'Data Science')]
     # df_skills = df_skills[(df_skills['Role']== 'Data Scientist')]
     skills_master = list(set(df_skills['Skills'].str.lower().tolist()))
-    course_text_master = []
     # print(skills_master)
 
     for c_idx, c_row in df_courses.iterrows():
+        course_text_master = []
         course_text = (str(c_row['Category']) + ' '
         + str(c_row['Course Name']) + ' '
         + str(c_row['Course Description']))

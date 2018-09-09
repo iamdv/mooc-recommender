@@ -44,26 +44,35 @@ def execute_cosine(fpath_skills, fpath_courses, my_role, output_fname):
     for _, c_row in df_courses.iterrows():
         c_wgtd_role_score = 0
         c_wgtd_skill_score = 0
+        c_wgtd_keyword_score = 0
+        skill_group = ''
         course_text = (str(c_row['Category']) + ' '
         + str(c_row['Course Name']) + ' '
-        + str(c_row['Course Description'])).encode('utf-8')
+        + str(c_row['Course Description'])).lower().encode('utf-8')
+
+        course_keywords = str(c_row['Course Keywords']).replace(' | ', ',').lower()
 
         for _, s_row in df_skills.iterrows():
             skill = str(s_row['Skills']).encode('utf-8')
+            skill_group = skill_group + ', ' + str(s_row['Skills']).lower()
             skill_weight = s_row['SkillWeight']
             
             c_wgtd_skill_score =  c_wgtd_skill_score + (cosine_sim(skill, course_text) * skill_weight)
-            c_wgtd_role_score = cosine_sim(s_row['Role'], c_row['Course Name'])
+            c_wgtd_role_score = cosine_sim(str(s_row['Role']).lower(), str(c_row['Course Name']).lower())
+            c_wgtd_keyword_score = cosine_sim(skill_group, course_keywords)
+            # print(c_row['Course Id'], skill_group)
+            # print(c_wgtd_keyword_score)
         
-        cosine_score.append((c_row['Course Id'], s_row['Role'], c_wgtd_skill_score, c_wgtd_role_score))
+        cosine_score.append((c_row['Course Id'], my_role, c_wgtd_skill_score, c_wgtd_role_score, c_wgtd_keyword_score))
     
     with open("././Data/Cosine-Distance/Single-Variable/" + output_fname,'w') as result:
         csv_out = csv.writer(result)
-        csv_out.writerow(['Course Id', 'Role', 'Skill_Score','Role_Score'])
+        csv_out.writerow(['Course Id', 'Role', 'Skill_Score','Role_Score', 'Keyword_Score'])
         for row in cosine_score:
             csv_out.writerow(row)   
     return None
 
 
 print(execute_cosine('././Data/linkedin_skills_weighted.csv',
-'././Data/main_coursera.csv', 'Data Scientist', 'CosDist_DataScientist.csv'))
+'././Data/main_coursera.csv', 'software development', 'CosDist_SoftwareDevelopment.csv'))
+
