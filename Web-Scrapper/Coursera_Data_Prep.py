@@ -9,15 +9,16 @@ from nltk.util import bigrams
 
 def extract_keywords(fpath_courses, fpath_skills):
     df_courses = pd.read_csv(fpath_courses, sep=',')
-    df_courses = df_courses[(df_courses['Category'] == 'Data Science')]
+    df_courses['Course Keywords'] = ''
     df_skills = pd.read_csv(fpath_skills, sep=',',
                             names=["Role", "Skills", "Endorsements", "Name"])
-    df_skills = df_skills[(df_skills['Role']== 'Data Scientist')]
+    # df_courses = df_courses[(df_courses['Category'] == 'Data Science')]
+    # df_skills = df_skills[(df_skills['Role']== 'Data Scientist')]
     skills_master = list(set(df_skills['Skills'].str.lower().tolist()))
     course_text_master = []
     # print(skills_master)
 
-    for _, c_row in df_courses.iterrows():
+    for c_idx, c_row in df_courses.iterrows():
         course_text = (str(c_row['Category']) + ' '
         + str(c_row['Course Name']) + ' '
         + str(c_row['Course Description']))
@@ -31,15 +32,17 @@ def extract_keywords(fpath_courses, fpath_skills):
         course_text_bigrm = list(map(" ".join,course_text_bigrm))
 
         # Combine the single words and bigrams into one master list
-        # course_text_master = [set(course_text_master).intersection(skills_master)]
+        # and take only the words are in skills
         for my_keyword in course_text + course_text_bigrm:
             if my_keyword in skills_master:
                 course_text_master.append(my_keyword)
 
-        print(course_text_master)
+        df_courses.set_value(c_idx, 'Course Keywords', ' | '.join(course_text_master))
 
+    # df_courses = df_courses.reset_index(drop=True)
+    df_courses = df_courses.drop(df_courses.columns[df_courses.columns.str.contains('unnamed',case = False)],axis = 1)
+    df_courses.to_csv(fpath_courses, sep=',', encoding='utf-8')
     return None
-    
 
 
 extract_keywords('././Data/Main_Coursera.csv', '././Data/linkedin_skills.csv')
