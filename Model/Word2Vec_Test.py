@@ -64,12 +64,11 @@ def run_word2vec(fpath_skills, fpath_courses, my_role, output_fname):
 
             if skill[0] in model:
                 skill_group.append(skill[0])
-                # print('Valid Skill: ', skill[0])
                 try:
-                    c_wgtd_skill_score = c_wgtd_skill_score + (word2vec_similarity(skill + role_list, course_text) * skill_weight)
-                    c_wgtd_role_score = word2vec_similarity(skill + role_list, course_name_list)
+                    c_wgtd_skill_score = c_wgtd_skill_score + (word2vec_similarity(skill, course_text) * skill_weight)
+                    c_wgtd_role_score = word2vec_similarity(skill, course_name_list)
                     c_wgtd_keyword_score = word2vec_similarity(skill_group, course_name_list)
-                except:
+                except ZeroDivisionError:
                     pass
             else:
                 pass
@@ -86,4 +85,4 @@ def run_word2vec(fpath_skills, fpath_courses, my_role, output_fname):
 
 
 print(run_word2vec('././Data/linkedin_skills_weighted.csv',
-'././Data/Main_Coursera.csv', 'data scientist', 'Word2VecCustom_DataScientist.csv'))
+'././Data/Main_Coursera.csv', 'financial accountant', 'Word2VecCustom_FinancialAccountant.csv'))
