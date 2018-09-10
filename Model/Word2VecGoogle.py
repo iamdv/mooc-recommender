@@ -68,7 +68,8 @@ def execute_word2vecGoogle(fpath_skills, fpath_courses, my_role, output_fname):
                 except ZeroDivisionError:
                     pass
             else:
-                print('Not a valid skill: ', skill[0])
+                pass
+                # print('Not a valid skill: ', skill[0])
             
         word2vec_score.append((c_row['Course Id'], my_role, c_wgtd_skill_score, c_wgtd_role_score, c_wgtd_keyword_score))
 
