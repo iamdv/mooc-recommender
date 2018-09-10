@@ -82,4 +82,4 @@ def execute_word2vecGoogle(fpath_skills, fpath_courses, my_role, output_fname):
 
 
 print(execute_word2vecGoogle('././Data/linkedin_skills_weighted.csv',
-'././Data/Main_Coursera.csv', 'database administrator', 'Word2VecGoogle_DatabaseAdministrator.csv'))
+'././Data/Main_Coursera.csv', 'software development', 'Word2VecGoogle_SoftwareDevelopment.csv'))
