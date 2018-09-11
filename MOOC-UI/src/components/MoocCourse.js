@@ -18,6 +18,7 @@ import StarBorderIcon from "@material-ui/icons/StarBorder";
 import StarIcon from "@material-ui/icons/Star";
 import Divider from "@material-ui/core/Divider";
 import Tooltip from "@material-ui/core/Tooltip";
+import Grid from "@material-ui/core/Grid";
 
 import Rating from "react-rating";
 
@@ -83,15 +84,49 @@ class MoocCourse extends React.Component {
             title={data.courseName}
             subheader={data.provider}
           />
-          <CardMedia
-            className={classes.media}
-            image="/static/images/cards/paella.jpg"
-            title="Contemplative Reptile"
-          />
           <CardContent>
-            <Typography component="p">
-              {data.universitiesInstitutions}
-            </Typography>
+            <Grid container spacing={40}>
+              <Grid item xs={4}>
+                <Typography color="primary" component="p">
+                  Provider
+                </Typography>
+                <Typography component="p">{data.provider}</Typography>
+              </Grid>
+              <Grid item xs={4}>
+                <Typography color="primary" component="p">
+                  Universities/Institutions
+                </Typography>
+                <Typography component="p">
+                  {data.universitiesInstitutions}
+                </Typography>
+              </Grid>
+              <Grid item xs={4}>
+                <Typography color="primary" component="p">
+                  Duraion (Weeks)
+                </Typography>
+                <Typography component="p">{data.length}</Typography>
+              </Grid>
+
+              <Grid item xs={4}>
+                <Typography color="primary" component="p">
+                  Parent Subject
+                </Typography>
+                <Typography component="p">{data.parentSubject}</Typography>
+              </Grid>
+              <Grid item xs={4}>
+                <Typography color="primary" component="p">
+                  Child Subject
+                </Typography>
+                <Typography component="p">{data.childSubject}</Typography>
+              </Grid>
+
+              <Grid item xs={4}>
+                <Typography color="primary" component="p">
+                  Workload
+                </Typography>
+                <Typography component="p">{data.workload}</Typography>
+              </Grid>
+            </Grid>
           </CardContent>
           <Divider />
           <CardActions className={classes.actions} disableActionSpacing>

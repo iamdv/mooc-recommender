@@ -41,14 +41,14 @@ class MoocRecommender extends React.Component {
 
     return (
       <div className={classes.root}>
-        <Slide direction="down" in={true} mountOnEnter unmountOnExit>
+        <Slide direction="down" timeout={600} in={true} mountOnEnter unmountOnExit>
           <MoocHeader />
         </Slide>
         
         <Grid container spacing={0}>
           <Grid item xs={12} className={classes.moocRecommenderContainer}>
             <Slide
-              direction="down"
+              direction="up"
               in={true}
               timeout={500}
               mountOnEnter

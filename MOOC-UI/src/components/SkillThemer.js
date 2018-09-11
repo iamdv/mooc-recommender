@@ -15,21 +15,21 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Button from "@material-ui/core/Button";
 import Grow from "@material-ui/core/Grow";
-import Fade from "@material-ui/core/Fade";
 import Slide from "@material-ui/core/Slide";
 import IconButton from "@material-ui/core/IconButton";
-import TableChartIcon from "@material-ui/icons/TableChart";
-import ViewStreamIcon from "@material-ui/icons/ViewStream";
+import Tooltip from "@material-ui/core/Tooltip";
+import TableChartIcon from "@material-ui/icons/TableChartTwoTone";
+import ViewStreamIcon from "@material-ui/icons/ViewAgendaTwoTone";
 
-import skillsData from "../data/skillListing.json";
+import rolesData from "../data/roleListing.json";
 import coursesData from "../data/courses.json";
 
 import MoocCourse from "./MoocCourse";
 import MoocCourseTable from "./MoocCourseTable";
 
-const suggestions = skillsData.skillListing.map(suggestion => ({
-  value: suggestion.skillTheme,
-  label: suggestion.skillTheme
+const suggestions = rolesData.roleListing.map(suggestion => ({
+  value: suggestion.roleTheme,
+  label: suggestion.roleTheme
 }));
 
 const styles = theme => ({
@@ -216,24 +216,9 @@ class SkillThemer extends React.Component {
     };
   }
 
-  handleFilterChange = event => {
-    this.setState({
-      skillFiltervalue: event.target.value,
-      skillTags:
-        this.state.selectedSkill &&
-        this.state.selectedSkill.length > 0 &&
-        event.target.value === "all"
-          ? this.state.selectedSkill[0].skillTags
-          : this.state.selectedSkill[0].skillTagsRecommended,
-      coursesCardData: [],
-      coursesTableData: [],
-      isTableView: false
-    });
-  };
-
   handleSkillThemeChange = name => value => {
-    const selectedSkill = skillsData.skillListing.filter(item => {
-      return item.skillTheme === value.label;
+    const selectedSkill = rolesData.roleListing.filter(item => {
+      return item.roleTheme === value.label;
     });
 
     this.setState({
@@ -285,10 +270,10 @@ class SkillThemer extends React.Component {
   fetchMoocRecommendations = () => {
     const _coursesData = coursesData.sort(
       (a, b) =>
-        a.skillRankMap[this.state.selectedSkill[0].skillID][
+        a.roleRankMap[this.state.selectedSkill[0].roleID][
           this.state.skillFiltervalue
         ] -
-        b.skillRankMap[this.state.selectedSkill[0].skillID][
+        b.roleRankMap[this.state.selectedSkill[0].roleID][
           this.state.skillFiltervalue
         ]
     );
@@ -335,35 +320,6 @@ class SkillThemer extends React.Component {
             <Grid item xs={12}>
               <Grid container spacing={24} className={classes.centerAligned}>
                 <Grid item xs={12}>
-                  <div className={classes.filterBox}>
-                    <Grow in={true} timeout={300} mountOnEnter unmountOnExit>
-                      <FormControl
-                        component="fieldset"
-                        className={classes.formControl}
-                      >
-                        <RadioGroup
-                          aria-label="Filter"
-                          name="filter"
-                          value={this.state.skillFiltervalue}
-                          onChange={this.handleFilterChange}
-                          row={true}
-                        >
-                          <FormControlLabel
-                            value="all"
-                            control={<Radio color="primary" />}
-                            label="All"
-                          />
-                          <FormControlLabel
-                            value="recommended"
-                            control={<Radio color="primary" />}
-                            label="Recommended"
-                          />
-                        </RadioGroup>
-                      </FormControl>
-                    </Grow>
-                  </div>
-                </Grid>
-                <Grid item xs={12}>
                   {this.state.skillTags.map(item => {
                     return (
                       <Grow
@@ -398,6 +354,7 @@ class SkillThemer extends React.Component {
                 {this.state.coursesCardData.length > 0 && (
                   <Grow in={true} timeout={800} mountOnEnter unmountOnExit>
                     <Grid item xs={12}>
+                    <Tooltip title="Table View" placement="right">
                       <IconButton
                         className={classes.viewChangeButton}
                         aria-label="Table Chart"
@@ -407,6 +364,8 @@ class SkillThemer extends React.Component {
                       >
                         <TableChartIcon />
                       </IconButton>
+                      </Tooltip>
+                    <Tooltip title="Card View" placement="left">
                       <IconButton
                         className={classes.viewChangeButton}
                         aria-label="View Stream"
@@ -416,6 +375,7 @@ class SkillThemer extends React.Component {
                       >
                         <ViewStreamIcon />
                       </IconButton>
+                      </Tooltip>
                     </Grid>
                   </Grow>
                 )}

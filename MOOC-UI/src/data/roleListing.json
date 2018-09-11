@@ -1,0 +1,67 @@
+{
+  "roleListing": [{
+      "roleID": 1,
+      "roleTheme": "Data Scientist",
+      "roleDomain": ["Data Science", "Machine Learning", "Statistical Learning"],
+      "skills": ["Python", "Statistics", "SQL", "LaTeX", "R", "Artificial Intelligence", "Data Analytis", "Numpy", "Pandas"],
+      "skillTags": ["Python", "Statistics", "SQL", "LaTeX", "R", "Artificial Intelligence", "Data Analytis", "Numpy", "Pandas"],
+      "skillTagsRecommended": ["Python", "R", "SQL", "Julia", "C++", "VBA", "Excel", "Matplotlib"]
+    },
+    {
+      "roleID": 2,
+      "roleTheme": "Software Developer",
+      "roleDomain": ["Big Data", "Data Engineering", "Database", "NoSQL", "Graph Database"],
+      "skills": ["Java", "Programming", "SQL", "JavaScript", "C#", "Spring", "Web Services", "OOP", "XML", "Algorithms"],
+      "skillTags": ["Java", "Programming", "SQL", "JavaScript", "C#", "Spring", "Web Services", "OOP", "XML", "Algorithms"],
+      "skillTagsRecommended": ["Java", "C++", "SQL", "Spring", "GoLang", "Web Services", "JavaScript", "Algorithms", "Unit Testing"]
+    },
+    {
+      "roleID": 3,
+      "roleTheme": "Database Administrator",
+      "roleDomain": ["Data Science", "Statistics", "Artificial Intelligence", "Deep Learning"],
+      "skills": ["Micorsoft SQL Server", "SQL", "Databases", "T-SQL", "SSIS", "Database Design", "ETL", "Powershell", "Bash", "Performance Tuning"],
+      "skillTags": ["Micorsoft SQL Server", "SQL", "Databases", "T-SQL", "SSIS", "Database Design", "ETL", "Powershell", "Bash", "Performance Tuning"],
+      "skillTagsRecommended": ["Micorsoft SQL Server", "SQL", "Databases", "T-SQL", "SSIS", "Database Design", "ETL", "Powershell", "Bash", "Performance Tuning"]
+    },
+    {
+      "roleID": 4,
+      "roleTheme": "Machine Learning Engineer",
+      "roleDomain": ["Data Science", "Statistics", "Business Intelligence", "Dimensional Modelling", "Data Visualization"],
+      "skills": ["Python", "Machine Learning", "C++", "Statistics", "Bigdata", "Algorithms", "Matlab", "Supervised Learning", "Tensor Flow", "Deep Learning"],
+      "skillTags": ["Python", "Machine Learning", "C++", "Statistics", "Bigdata", "Algorithms", "Matlab", "Supervised Learning", "Tensor Flow", "Deep Learning"],
+      "skillTagsRecommended": ["Python", "Machine Learning", "C++", "Statistics", "Bigdata", "Algorithms", "Matlab", "Supervised Learning", "Tensor Flow", "Deep Learning"]
+    },
+    {
+      "roleID": 5,
+      "roleTheme": "Cybersecurity Consultant",
+      "roleDomain": ["Infosec", "Security", "Malware Analysis", "Dimensional Modelling"],
+      "skills": ["Infosec", "Security", "Malware Analysis", "Network Security", "Ethnical Hacking", "Vulnerbility Management", "Penetration Testing", "Windows Server", "Active Directory","Firewall"],
+      "skillTags": ["Infosec", "Security", "Malware Analysis", "Network Security", "Ethnical Hacking", "Vulnerbility Management", "Penetration Testing", "Windows Server", "Active Directory","Firewall"],
+      "skillTagsRecommended": ["Infosec", "Security", "Malware Analysis", "Network Security", "Ethnical Hacking", "Vulnerbility Management", "Penetration Testing", "Windows Server", "Active Directory","Firewall"]
+    },
+    {
+      "roleID": 6,
+      "roleTheme": "Financial Consultant",
+      "roleDomain": ["Data Science", "Statistics", "Business Intelligence", "Dimensional Modelling"],
+      "skills": ["Financial Market", "Accounting", "Fx", "Fixed Income", "Investments", "Wealth Management", "Account Reconciliation", "Financial Advisory", "Equities", "Regulations"],
+      "skillTags": ["Financial Market", "Accounting", "Fx", "Fixed Income", "Investments", "Wealth Management", "Account Reconciliation", "Financial Advisory", "Equities", "Regulations"],
+      "skillTagsRecommended": ["Financial Market", "Accounting", "Fx", "Fixed Income", "Investments", "Wealth Management", "Account Reconciliation", "Financial Advisory", "Equities", "Regulations"]
+    },
+    {
+      "roleID": 7,
+      "roleTheme": "Musician",
+      "roleDomain": ["Data Science", "Statistics", "Business Intelligence", "Dimensional Modelling"],
+      "skills": ["Music Industry", "Entertainment", "Recording", "Song Writing", "Composition", "Music Production", "Sound Editing", "Classical", "Guitarist", "Piano"],
+      "skillTags": ["Music Industry", "Entertainment", "Recording", "Song Writing", "Composition", "Music Production", "Sound Editing", "Classical", "Guitarist", "Piano"],
+      "skillTagsRecommended": ["Music Industry", "Entertainment", "Recording", "Song Writing", "Composition", "Music Production", "Sound Editing", "Classical", "Guitarist", "Piano"]
+    },
+    {
+      "roleID": 8,
+      "roleTheme": "Nutrionist",
+      "roleDomain": ["Data Science", "Statistics", "Business Intelligence", "Dimensional Modelling"],
+      "skills": ["Nutrition", "Dietetics", "Clinical Nutrition", "Diabetes", "Public Health", "Sports Nutrition", "Child Nutrition", "Research", "Health Promotion", "Masters Degree"],
+      "skillTags": ["Nutrition", "Dietetics", "Clinical Nutrition", "Diabetes", "Public Health", "Sports Nutrition", "Child Nutrition", "Research", "Health Promotion", "Masters Degree"],
+      "skillTagsRecommended": ["Nutrition", "Dietetics", "Clinical Nutrition", "Diabetes", "Public Health", "Sports Nutrition", "Child Nutrition", "Research", "Health Promotion", "Masters Degree"]
+    }       
+  ]
+}
