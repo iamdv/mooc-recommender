@@ -154,10 +154,10 @@
     "certificate": 1,
     "workload": "8-10 hours a week",
     "roleRankMap": {
-      "1": { "all": 1, "isRightPredict": false },
+      "1": { "all": 1, "isRightPredict": true },
       "2": { "all": 5, "isRightPredict": true },
       "3": { "all": 1, "isRightPredict": false },
-      "4": { "all": 5, "isRightPredict": true },
+      "4": { "all": 5, "isRightPredict": false },
       "5": { "all": 1, "isRightPredict": false },
       "6": { "all": 5, "isRightPredict": true },   
       "7": { "all": 1, "isRightPredict": true },   

@@ -9,10 +9,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 import { emphasize } from "@material-ui/core/styles/colorManipulator";
 import Grid from "@material-ui/core/Grid";
 import Chip from "@material-ui/core/Chip";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormControl from "@material-ui/core/FormControl";
 import Button from "@material-ui/core/Button";
 import Grow from "@material-ui/core/Grow";
 import Slide from "@material-ui/core/Slide";
@@ -268,15 +264,21 @@ class SkillThemer extends React.Component {
   };
 
   fetchMoocRecommendations = () => {
-    const _coursesData = coursesData.sort(
-      (a, b) =>
-        a.roleRankMap[this.state.selectedSkill[0].roleID][
-          this.state.skillFiltervalue
-        ] -
-        b.roleRankMap[this.state.selectedSkill[0].roleID][
-          this.state.skillFiltervalue
-        ]
-    );
+    const _coursesData = coursesData
+      .filter(
+        o =>
+          o.roleRankMap[this.state.selectedSkill[0].roleID].isRightPredict ===
+          true
+      )
+      .sort(
+        (a, b) =>
+          a.roleRankMap[this.state.selectedSkill[0].roleID][
+            this.state.skillFiltervalue
+          ] -
+          b.roleRankMap[this.state.selectedSkill[0].roleID][
+            this.state.skillFiltervalue
+          ]
+      );
 
     this.setState({
       coursesCardData: _coursesData,
@@ -286,7 +288,7 @@ class SkillThemer extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, theme } = this.props;
 
     return (
       <div className={classes.root}>
@@ -354,27 +356,29 @@ class SkillThemer extends React.Component {
                 {this.state.coursesCardData.length > 0 && (
                   <Grow in={true} timeout={800} mountOnEnter unmountOnExit>
                     <Grid item xs={12}>
-                    <Tooltip title="Table View" placement="right">
-                      <IconButton
-                        className={classes.viewChangeButton}
-                        aria-label="Table Chart"
-                        //disabled={this.state.isTableView}
-                        color={!this.state.isTableView ? "default" : "primary"}
-                        onClick={this.changeToTableView}
-                      >
-                        <TableChartIcon />
-                      </IconButton>
+                      <Tooltip title="Table View" placement="right">
+                        <IconButton
+                          className={classes.viewChangeButton}
+                          aria-label="Table Chart"
+                          //disabled={this.state.isTableView}
+                          color={
+                            !this.state.isTableView ? "default" : "primary"
+                          }
+                          onClick={this.changeToTableView}
+                        >
+                          <TableChartIcon />
+                        </IconButton>
                       </Tooltip>
-                    <Tooltip title="Card View" placement="left">
-                      <IconButton
-                        className={classes.viewChangeButton}
-                        aria-label="View Stream"
-                        //disabled={!this.state.isTableView}
-                        color={this.state.isTableView ? "default" : "primary"}
-                        onClick={this.changeToCardView}
-                      >
-                        <ViewStreamIcon />
-                      </IconButton>
+                      <Tooltip title="Card View" placement="left">
+                        <IconButton
+                          className={classes.viewChangeButton}
+                          aria-label="View Stream"
+                          //disabled={!this.state.isTableView}
+                          color={this.state.isTableView ? "default" : "primary"}
+                          onClick={this.changeToCardView}
+                        >
+                          <ViewStreamIcon />
+                        </IconButton>
                       </Tooltip>
                     </Grid>
                   </Grow>
@@ -383,10 +387,15 @@ class SkillThemer extends React.Component {
             </Grid>
           )}
           {this.state.skillTags.length > 0 && (
-            <div>
+            <Grid
+              container
+              direction="column"
+              justify="space-evenly"
+              alignItems="stretch"
+            >
               {!this.state.isTableView && (
                 <Grid item xs={12}>
-                  <Grid container spacing={16}>
+                  <Grid container spacing={theme.spacing.unit * 3}>
                     {this.state.coursesCardData.map((item, index) => {
                       return (
                         <Grow
@@ -424,7 +433,7 @@ class SkillThemer extends React.Component {
                   </Slide>
                 </Grid>
               )}
-            </div>
+            </Grid>
           )}
         </Grid>
       </div>
