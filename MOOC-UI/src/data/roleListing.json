@@ -17,7 +17,7 @@
     },
     {
       "roleID": 3,
-      "roleTheme": "Database Administrator",
+      "roleTheme": "Database Developer/Admin",
       "roleDomain": ["Data Science", "Statistics", "Artificial Intelligence", "Deep Learning"],
       "skills": ["Micorsoft SQL Server", "SQL", "Databases", "T-SQL", "SSIS", "Database Design", "ETL", "Powershell", "Bash", "Performance Tuning"],
       "skillTags": ["Micorsoft SQL Server", "SQL", "Databases", "T-SQL", "SSIS", "Database Design", "ETL", "Powershell", "Bash", "Performance Tuning"],
