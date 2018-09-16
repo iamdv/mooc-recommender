@@ -57,7 +57,7 @@
     },
     {
       "roleID": 8,
-      "roleTheme": "Nutrionist",
+      "roleTheme": "Nutritionist",
       "roleDomain": ["Data Science", "Statistics", "Business Intelligence", "Dimensional Modelling"],
       "skills": ["Nutrition", "Dietetics", "Clinical Nutrition", "Diabetes", "Public Health", "Sports Nutrition", "Child Nutrition", "Research", "Health Promotion", "Masters Degree"],
       "skillTags": ["Nutrition", "Dietetics", "Clinical Nutrition", "Diabetes", "Public Health", "Sports Nutrition", "Child Nutrition", "Research", "Health Promotion", "Masters Degree"],

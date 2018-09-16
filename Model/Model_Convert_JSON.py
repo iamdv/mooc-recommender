@@ -14,50 +14,56 @@ def convert_to_json(fpath):
                 my_json_string = my_json_string + \
                 '{"courseId": ' + row[1] + ',' + \
                 '"courseName": "' + row[2].replace('"', '') + '",' \
-                '"slug": "' + row[4].replace('"', '') + '"' \
-                '},'
-        my_json_string = my_json_string + ']'
+                '"slug": "' + row[4].replace('"', '') + '",' \
+                '"provider": "' + row[5].replace('"', '') + '",' \
+                '"universitiesInstitutions": "' + row[6].replace('"', '') + '",' \
+                '"parentSubject": "' + row[7].replace('"', '') + '",' \
+                '"childSubject": "' + row[8].replace('"', '') + '",' \
+                '"category": "' + row[9].replace('"', '') + '",' \
+                '"url": "' + row[10].replace('"', '') + '",' \
+                '"nextSessionDate": "' + "NA" + '",' \
+                '"length": "' + row[11].replace('"', '') + '",' \
+                '"language": "' + row[12].replace('"', '') + '",' \
+                '"courseDescription": "' + row[3].replace('"', '') + '",' \
+                '"credentialName": "' + row[13].replace('"', '') + '",' \
+                '"created": "' + "NA" + '",' \
+                '"status": "' + "Self paced" + '",' \
+                '"rating": "' + row[14].replace('"', '') + '",' \
+                '"numberOfRatings": "' + row[15].replace('"', '') + '",' \
+                '"certificate": "' + row[16].replace('"', '') + '",' \
+                '"workload": "' + row[17].replace('"', '') + '",' \
+                '"roleRankMap":' \
+                '{"1":' + '{' \
+                '"all": "' + str(round(float(row[18]), 4)).replace('"', '') + '",' \
+                '"isRightPredict": "' + row[19].lower().replace('"', '') + '"},' \
+                '"2":' + '{' \
+                '"all": "' + str(round(float(row[20]), 4)).replace('"', '') + '",' \
+                '"isRightPredict": "' + row[21].lower().replace('"', '') + '"},' \
+                '"3":' + '{' \
+                '"all": "' + str(round(float(row[22]), 4)).replace('"', '') + '",' \
+                '"isRightPredict": "' + row[23].lower().replace('"', '') + '"},' \
+                '"4":' + '{' \
+                '"all": "' + str(round(float(row[28]), 4)).replace('"', '') + '",' \
+                '"isRightPredict": "' + row[29].lower().replace('"', '') + '"},' \
+                '"5":' + '{' \
+                '"all": "' + str(round(float(row[24]), 4)).replace('"', '') + '",' \
+                '"isRightPredict": "' + row[25].lower().replace('"', '') + '"},' \
+                '"6":' + '{' \
+                '"all": "' + str(round(float(row[26]), 4)).replace('"', '') + '",' \
+                '"isRightPredict": "' + row[27].lower().replace('"', '') + '"},' \
+                '"7":' + '{' \
+                '"all": "' + str(round(float(row[30]), 4)).replace('"', '') + '",' \
+                '"isRightPredict": "' + row[31].lower().replace('"', '') + '"},' \
+                '"8":' + '{' \
+                '"all": "' + str(round(float(row[32]), 4)).replace('"', '') + '",' \
+                '"isRightPredict": "' + row[33].lower().replace('"', '') + '"}' \
+                '}},'
+        my_json_string = my_json_string + ']"'
    
-    with open('test.json', 'w') as outfile:
-        json.dump(my_json_string, outfile)
+    with open('./Data/Final_Model_Output.txt', 'w') as outfile:
+        json.dump(my_json_string, outfile, ensure_ascii=False)
     return None
-
 
 
 print(convert_to_json("./Data/Final_Model_Output.csv"))
 
-
-# [
-#   {
-#     "courseId": 301,
-#     "courseName": "Introduction to Artificial Intelligence",
-#     "slug": "udacity-introduction-to-artificial-intelligence",
-#     "provider": "Udacity",
-#     "universitiesInstitutions": "Stanford University",
-#     "parentSubject": "Computer Science",
-#     "childSubject": "Artificial Intelligence",
-#     "category": "Artificial Intelligence",
-#     "url": "https://www.coursera.org/learn/jews-in-china",
-#     "nextSessionDate": "Self paced",
-#     "length": "10",
-#     "language": "English",
-#     "videoUrl": "https://www.youtube.com/watch?feature=player_embedded&v=BnIJ7Ba5Sr4",
-#     "courseDescription": "Online Introduction to Artificial Intelligence is based on Stanford CS221, Introduction to Artificial Intelligence. This class introduces students to the basics of Artificial Intelligence, which includes machine learning, probabilistic reasoning, robotics, and natural language processing.\n\nThe objective of this class is to teach you modern AI. You learn about the basic techniques and tricks of the trade, at the same level we teach our Stanford students. We also aspire to excite you about the field of AI. Whether you are a seasoned professional, a college student, or a curious high school student - everyone can participate.",
-#     "credentialName": "",
-#     "created": "",
-#     "status": "selfpaced",
-#     "rating": 4.0833333333333,
-#     "numberOfRatings": 24,
-#     "certificate": "",
-#     "workload": "6 hours a week",
-#     "roleRankMap": {
-#       "1": { "all": 5, "isRightPredict": false },
-#       "2": { "all": 1, "isRightPredict": true },
-#       "3": { "all": 5, "isRightPredict": false },
-#       "4": { "all": 1, "isRightPredict": true },
-#       "5": { "all": 5, "isRightPredict": false },
-#       "6": { "all": 5, "isRightPredict": true },   
-#       "7": { "all": 1, "isRightPredict": true },   
-#       "8": { "all": 5, "isRightPredict": false }      
-#     }
-# ]
