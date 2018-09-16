@@ -71,7 +71,7 @@ class MoocCourse extends React.Component {
             }
             action={
               <Rating
-                initialRating={data.rating}
+                initialRating={parseFloat(data.rating, 10)}
                 emptySymbol={<StarBorderIcon color="primary" />}
                 fullSymbol={<StarIcon color="primary" />}
                 readonly

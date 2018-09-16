@@ -266,18 +266,20 @@ class SkillThemer extends React.Component {
   fetchMoocRecommendations = () => {
     const _coursesData = coursesData
       .filter(
-        o =>
-          o.roleRankMap[this.state.selectedSkill[0].roleID].isRightPredict ===
-          true
+        o => o[this.state.selectedSkill[0].roleThemeKey + "Predict"] === "True"
       )
       .sort(
         (a, b) =>
-          a.roleRankMap[this.state.selectedSkill[0].roleID][
-            this.state.skillFiltervalue
-          ] -
-          b.roleRankMap[this.state.selectedSkill[0].roleID][
-            this.state.skillFiltervalue
-          ]
+          parseFloat(
+            b[this.state.selectedSkill[0].roleThemeKey + "FinalScore"],
+            10
+          ) *
+            1000 -
+          parseFloat(
+            a[this.state.selectedSkill[0].roleThemeKey + "FinalScore"],
+            10
+          ) *
+            1000
       );
 
     this.setState({
@@ -420,7 +422,7 @@ class SkillThemer extends React.Component {
                   <Slide
                     direction="up"
                     in={this.state.isTableView}
-                    timeout={400}
+                    timeout={100}
                     mountOnEnter
                     unmountOnExit
                   >
